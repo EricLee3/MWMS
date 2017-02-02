@@ -37,9 +37,6 @@ public class ChooseBrandActivity extends AppCompatActivity {
 
         NetworkTask networkTask = new NetworkTask();
         networkTask.execute("");
-        //ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU);
-        //ListView listview = (ListView) findViewById(R.id.listView1);
-        //listview.setAdapter(adapter);
     }
 
     public class NetworkTask extends AsyncTask<String, Void, StringBuilder> {
