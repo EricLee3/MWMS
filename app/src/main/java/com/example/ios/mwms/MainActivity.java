@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        intent = new Intent(this, ChooseBrandActivity.class);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,13 +43,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)  {
                 //getBrandList();
-                Toast.makeText(getApplicationContext(), "onClick clicked", Toast.LENGTH_LONG).show();
-                startActivity(intent);
+                //Toast.makeText(getApplicationContext(), "onClick clicked", Toast.LENGTH_LONG).show();
+                intent = new Intent(MainActivity.this, ChooseBrandActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        Button mGetStockInfo = (Button) findViewById(R.id.btn_Stock_Info);
+        mGetStockInfo.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick(View view)  {
+                TextView tvBrandNm = (TextView)findViewById(R.id.BrandNm);
+                if (tvBrandNm.getText() == "") {
+                    Toast.makeText(getApplicationContext(), "You should select brand name first", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent stockIntent = new Intent(MainActivity.this, StockInfoActivity.class);
+                    startActivity(stockIntent);
+                }
             }
         });
         // Example of a call to a native method
         //TextView tv = (TextView) findViewById(R.id.sample_text);
         //tv.setText(stringFromJNI());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)  {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK)  {
+            if (requestCode == 1)  {
+                TextView tvBrandNm = (TextView)findViewById(R.id.BrandNm);
+                tvBrandNm.setText(data.getStringExtra("strBrandNm"));
+                //Toast.makeText(getApplicationContext(), data.getStringExtra("strBrandNm"), Toast.LENGTH_LONG).show();
+            }
+
+        }
     }
 
     @Override

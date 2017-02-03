@@ -10,8 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,20 +23,20 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ChooseBrandActivity extends AppCompatActivity {
-    static final String[] LIST_MENU = {"List1", "List2", "List3"};
+public class StockInfoActivity extends AppCompatActivity {
     ListView listview;
     ListViewAdapter adapter;
     Intent intent = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_brand);
+        setContentView(R.layout.activity_stock_info);
 
         adapter = new ListViewAdapter();
-        listview = (ListView) findViewById(R.id.listView1);
+        listview = (ListView) findViewById(R.id.ListViewStockInfo);
         listview.setAdapter(adapter);
 
+        /*
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View clickedView, int pos, long id)   {
@@ -52,6 +50,7 @@ public class ChooseBrandActivity extends AppCompatActivity {
                 finish();
             }
         });
+        */
         NetworkTask networkTask = new NetworkTask();
         networkTask.execute("");
     }
@@ -62,12 +61,12 @@ public class ChooseBrandActivity extends AppCompatActivity {
         String result = null;
         StringBuilder builder = null;
 
-        java.net.URL Url = null;
+        URL Url = null;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            strUrl = "http://192.168.30.35:9080/delegateAndroidDao/testSelect.jsp?command=LoadData";
+            strUrl = "http://192.168.30.35:9080/delegateAndroidDao/testSelect.jsp?command=LoadStock";
             if (builder != null)
                 builder.setLength(0);
         }
@@ -124,7 +123,8 @@ public class ChooseBrandActivity extends AppCompatActivity {
     }
 
     public void addList(JSONObject jsonObj) throws JSONException {
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_account_box_black_36dp), jsonObj.getString("BRAND_NM"), "");
+        String desc="Warehouse : " + jsonObj.getString("CENTER_CD") + "\n" + "item state : " + jsonObj.getString("ITEM_STATE") + "\n" + "stock qty : " + jsonObj.getString("STOCK_QTY");
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_account_box_black_36dp), jsonObj.getString("ITEM_CD"), desc);
     }
 
     public void btnStart(View v) {
