@@ -28,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -414,7 +415,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             // TODO: register the new account here.
-            return true;
+            if (builder.toString().equals("invalid user id or password"))  {
+                // can't use toast in this method IOS
+                // Toast.makeText(getApplicationContext(), "You must remember your ID/PW first", Toast.LENGTH_LONG).show();
+
+                return false;
+            } else
+                return true;
         }
 
         @Override
@@ -428,6 +435,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(intent);
                 finish();
             } else {
+                Toast.makeText(LoginActivity.this, "You must remember your ID/PW first", Toast.LENGTH_LONG).show();
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
