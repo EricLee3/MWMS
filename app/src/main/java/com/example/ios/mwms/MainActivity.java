@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You should select brand name first", Toast.LENGTH_LONG).show();
                 } else {
                     Intent stockIntent = new Intent(MainActivity.this, StockInfoActivity.class);
+                    stockIntent.putExtra("brandNm", tvBrandNm.getText());
                     startActivity(stockIntent);
                 }
             }

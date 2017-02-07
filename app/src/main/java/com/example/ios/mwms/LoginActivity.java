@@ -338,7 +338,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private String getPostString()  {
             StringBuilder result = new StringBuilder();
-            boolean first = true;
+            //boolean first = true;
 
             try  {
                 result.append(URLEncoder.encode("email", "UTF-8"));
