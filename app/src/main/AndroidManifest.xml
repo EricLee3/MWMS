@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ios.mwms">
 
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -27,6 +32,25 @@
             android:theme="@style/AppTheme.NoActionBar" ></activity>
         <activity android:name=".ChooseBrandActivity"></activity>
         <activity android:name=".StockInfoActivity"></activity>
+
+        <activity android:name="com.google.zxing.client.android.CaptureActivity"
+            android:screenOrientation="landscape"
+            android:clearTaskOnLaunch="true"
+            android:stateNotNeeded="true"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.SCAN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http" android:host="zxing.appspot.com" android:path="/scan"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -16,4 +16,5 @@
     <!-- Strings related to Main -->
     <string name="choose_brand">Choose Brand</string>
     <string name="stock_info">Get Stock Info</string>
+    <string name="LogOut">Log Out</string>
 </resources>

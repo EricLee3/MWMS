@@ -63,6 +63,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button mLogOut = (Button) findViewById(R.id.btn_LogOut);
+        mLogOut.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick(View view)  {
+                Intent logOutIntent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(logOutIntent);
+            }
+        });
         // Example of a call to a native method
         //TextView tv = (TextView) findViewById(R.id.sample_text);
         //tv.setText(stringFromJNI());
