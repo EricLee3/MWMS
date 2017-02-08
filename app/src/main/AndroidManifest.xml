@@ -32,6 +32,7 @@
             android:theme="@style/AppTheme.NoActionBar" ></activity>
         <activity android:name=".ChooseBrandActivity"></activity>
         <activity android:name=".StockInfoActivity"></activity>
+        <activity android:name=".CameraActivity"></activity>
 
         <activity android:name="com.google.zxing.client.android.CaptureActivity"
             android:screenOrientation="landscape"
