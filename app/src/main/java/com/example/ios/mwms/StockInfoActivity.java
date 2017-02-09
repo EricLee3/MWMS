@@ -129,6 +129,7 @@ public class StockInfoActivity extends AppCompatActivity {
             try {
                 wmsUrl = new URL(strUrl);
                 HttpURLConnection conn = (HttpURLConnection) wmsUrl.openConnection();
+                conn.setConnectTimeout(5000);
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
                 conn.setDoInput(true);

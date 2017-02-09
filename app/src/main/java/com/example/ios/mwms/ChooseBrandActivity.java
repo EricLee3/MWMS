@@ -77,6 +77,7 @@ public class ChooseBrandActivity extends AppCompatActivity {
             try {
                 Url = new URL(strUrl);
                 HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
+                conn.setConnectTimeout(5000);
                 conn.setRequestMethod("GET");
                 conn.setDoOutput(true);
                 conn.setDoInput(true);

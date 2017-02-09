@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         //TextView tv = (TextView) findViewById(R.id.sample_text);
         //tv.setText(stringFromJNI());
     }
+
     public final int CALL_ZXING_RESULT = 1234;
     public final int CALL_BRAND_ACTIVITY = 1111;
 

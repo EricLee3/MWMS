@@ -364,6 +364,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             try {
                 wmsUrl = new URL(strUrl);
                 HttpURLConnection conn = (HttpURLConnection) wmsUrl.openConnection();
+                conn.setConnectTimeout(5000);
                 // using POST method
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
