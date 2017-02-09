@@ -18,5 +18,6 @@
     <string name="stock_info">Get Stock Info</string>
     <string name="LogOut">Log Out</string>
     <string name="scan_barcode">Scan Barcode</string>
+    <string name="outbound">Outbound Goods</string>
 
 </resources>

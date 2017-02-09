@@ -329,7 +329,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPreExecute()  {
             super.onPreExecute();
-            strUrl = "http://192.168.0.16:8080/androidServer/testLogin.jsp?command=login";
+            strUrl = "http://192.168.30.35:9080/androidServer/testLogin.jsp?command=login";
             message = mEmail + mPassword;
             if (builder != null)
                 builder.setLength(0);
@@ -365,6 +365,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 wmsUrl = new URL(strUrl);
                 HttpURLConnection conn = (HttpURLConnection) wmsUrl.openConnection();
                 conn.setConnectTimeout(5000);
+                conn.setReadTimeout(3000);
                 // using POST method
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
@@ -404,6 +405,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 e.printStackTrace();
             } catch (IOException io)  {
                 io.printStackTrace();
+            } catch (Exception e)  {
+                e.printStackTrace();
             }
 
 

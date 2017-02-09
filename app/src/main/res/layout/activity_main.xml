@@ -57,10 +57,19 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/btn_outbound"
+        android:text="@string/outbound"
+        android:onClick="GetOutboundInfo"
+        android:layout_marginTop="180dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/btn_Scan_Barcode"
         android:text="@string/scan_barcode"
         android:onClick="ScanBarcode"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="230dp"
         android:textStyle="bold" />
 
     <Button

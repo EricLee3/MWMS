@@ -84,6 +84,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(scanBarcodeIntent, CALL_ZXING_RESULT);
             }
         });
+
+        Button mOutboundStock = (Button) findViewById(R.id.btn_outbound);
+        mOutboundStock.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick(View view)  {
+                Intent outboundStockIntent = new Intent(MainActivity.this, OutboundActivity.class);
+                startActivityForResult(outboundStockIntent, CALL_OUTBOUND_ACTIVITY);
+            }
+        });
         // Example of a call to a native method
         //TextView tv = (TextView) findViewById(R.id.sample_text);
         //tv.setText(stringFromJNI());
@@ -91,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final int CALL_ZXING_RESULT = 1234;
     public final int CALL_BRAND_ACTIVITY = 1111;
+    public final int CALL_OUTBOUND_ACTIVITY = 1122;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)  {
