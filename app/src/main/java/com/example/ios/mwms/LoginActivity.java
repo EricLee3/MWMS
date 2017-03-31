@@ -329,7 +329,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPreExecute()  {
             super.onPreExecute();
-            strUrl = "http://192.168.30.35:9080/delegateAndroidDao/testLogin.jsp?command=login";
+            strUrl = "http://192.168.10.16:8090/delegateAndroidDao/testLogin.jsp?command=login";
             message = mEmail + mPassword;
             if (builder != null)
                 builder.setLength(0);

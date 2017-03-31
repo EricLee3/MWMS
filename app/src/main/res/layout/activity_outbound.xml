@@ -10,7 +10,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.example.ios.mwms.OutboundActivity">
 
-    <ProgressBar
+        <ProgressBar
         android:layout_centerHorizontal="true"
         android:id="@+id/stock_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -19,12 +19,26 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <TextView
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_outbound_button"/>
+
+        <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView"/>
 
-    <DatePicker
+        <ProgressBar
+            android:layout_centerHorizontal="true"
+            android:id="@+id/outbound_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <DatePicker
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:id="@+id/datePicker"

@@ -52,6 +52,7 @@ public class OutboundActivity extends AppCompatActivity {
     TextView mTxtDate;
     private View mProgressView;
     private FloatingGroupExpandableListView myList;
+    private BaseExpandableListAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +61,9 @@ public class OutboundActivity extends AppCompatActivity {
 
         mDatePicker = (DatePicker)findViewById(R.id.datePicker);
         mTxtDate = (TextView)findViewById(R.id.textView);
-        mProgressView = findViewById(R.id.stock_progress);
+        mProgressView = findViewById(R.id.outbound_progress);
 
-        FloatingGroupExpandableListView myList = (FloatingGroupExpandableListView) findViewById(R.id.outbound_list);
-        BaseExpandableListAdapter myAdapter = new SampleAdapter(this);
-        WrapperExpandableListAdapter wrapperAdapter = new WrapperExpandableListAdapter(myAdapter);
-        myList.setAdapter(wrapperAdapter);
+
 
         mDatePicker.init(mDatePicker.getYear(), mDatePicker.getMonth(), mDatePicker.getDayOfMonth(), new DatePicker.OnDateChangedListener()  {
             @Override
@@ -73,29 +71,20 @@ public class OutboundActivity extends AppCompatActivity {
                 mTxtDate.setText(String.format("%d/%d/%d", year, monthOfYear+1, dayOfMonth));
                 //getOutboundList();
             }
-
         });
 
-        /*
-        mDatePicker.setOnClickListener(new View.OnClickListener() {
+
+        Button mSearchOutboundBtn = (Button) findViewById(R.id.search_outbound_button);
+        mSearchOutboundBtn.setOnClickListener(new View.OnClickListener()  {
             @Override
-            public void onClick(View v) {
-                Log.d("IOS log", "clicked");
+            public void onClick(View view)  {
+                getOutboundList();
             }
         });
-        */
 
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
+
+
     }
 
     public void getOutboundList()  {
@@ -139,14 +128,14 @@ public class OutboundActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            myList.setVisibility(show ? View.GONE : View.VISIBLE);
+            /*myList.setVisibility(show ? View.GONE : View.VISIBLE);
             myList.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     myList.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
-            });
+            });*/
 
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
@@ -160,7 +149,7 @@ public class OutboundActivity extends AppCompatActivity {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            myList.setVisibility(show ? View.GONE : View.VISIBLE);
+//            myList.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -230,6 +219,15 @@ public class OutboundActivity extends AppCompatActivity {
         protected void onPostExecute(StringBuilder stb) {
             Log.d("onPostExecute ", stb.toString());
             showProgress(false);
+            String strOrder = null;
+
+
+            FloatingGroupExpandableListView myList = (FloatingGroupExpandableListView) findViewById(R.id.outbound_list);
+            myAdapter = new SampleAdapter(OutboundActivity.this);
+            WrapperExpandableListAdapter wrapperAdapter = new WrapperExpandableListAdapter(myAdapter);
+            myList.setAdapter(wrapperAdapter);
+
+            ((SampleAdapter)myAdapter).initializeGroups();
 
             if (stb.toString().length() == 2)  { // no brand stock data from the server, '2' means the brackets in the JSON format
                 //Toast.makeText(StockInfoActivity.this, "The retrieved data is zero", Toast.LENGTH_LONG);
@@ -239,10 +237,18 @@ public class OutboundActivity extends AppCompatActivity {
                     JSONArray jsArray = new JSONArray(stb.toString());
 
                     for (int x = 0; x < jsArray.length(); x++) {
+                        // to get JSON Object
                         JSONObject tmpJsonObj = jsArray.getJSONObject(x);
+                        strOrder = tmpJsonObj.getString("CENTER_CD")+ " / " + tmpJsonObj.getString("ORDER_NO")+ " / " +tmpJsonObj.getString("ORD_NM")+ " / ";
+                        ((SampleAdapter)myAdapter).setmGroups(strOrder, x);
+
+                        // to get JSONArray(list) from Object
+                        JSONArray tmpJsonArrray = tmpJsonObj.getJSONArray("orderList");
+                        for (int y = 0; y < tmpJsonArrray.length(); y++)  {
+                            // set the order details
+                        }
                     }
                 } catch (JSONException e) {
-
                 }
             }
         }
